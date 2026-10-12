@@ -1,0 +1,20 @@
+<%= form_with(model: venta) do |form| %>
+  <% if venta.errors.any? %>
+    <div style="color:red">
+      <ul><% venta.errors.each do |error| %><li><%= error.full_message %></li><% end %></ul>
+    </div>
+  <% end %>
+  <div>
+    <%= form.label :vendedor_id, "Vendedor" %>
+    <%= form.collection_select :vendedor_id, Vendedor.order(:nombre), :id, :nombre, prompt: "Seleccione" %>
+  </div>
+  <div>
+    <%= form.label :monto %>
+    <%= form.number_field :monto, step: 0.01 %>
+  </div>
+  <div>
+    <%= form.label :fecha %>
+    <%= form.date_field :fecha %>
+  </div>
+  <div><%= form.submit %></div>
+<% end %>

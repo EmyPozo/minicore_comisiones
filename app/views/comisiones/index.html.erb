@@ -1,0 +1,36 @@
+<h1>Cálculo de comisiones</h1>
+
+<%= form_with url: comisiones_path, method: :get do |f| %>
+  <div>
+    <%= f.label :fecha_inicio, "Fecha inicio" %>
+    <%= f.date_field :fecha_inicio, value: @fecha_inicio %>
+  </div>
+  <div>
+    <%= f.label :fecha_fin, "Fecha fin" %>
+    <%= f.date_field :fecha_fin, value: @fecha_fin %>
+  </div>
+  <%= f.submit "Calcular" %>
+<% end %>
+
+<% if @error %>
+  <p style="color:red"><%= @error %></p>
+<% end %>
+
+<% if @resultados %>
+  <table border="1" cellpadding="6">
+    <thead>
+      <tr><th>Vendedor</th><th>Total ventas</th><th>Regla</th><th>%</th><th>Comisión</th></tr>
+    </thead>
+    <tbody>
+      <% @resultados.each do |r| %>
+        <tr>
+          <td><%= r.vendedor.nombre %></td>
+          <td><%= number_to_currency(r.total_ventas) %></td>
+          <td><%= r.regla ? r.regla.nombre : "Sin regla" %></td>
+          <td><%= r.porcentaje %>%</td>
+          <td><%= number_to_currency(r.comision) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

@@ -1,0 +1,37 @@
+<%= form_with(model: regla) do |form| %>
+  <% if regla.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(regla.errors.count, "error") %> prohibited this regla from being saved:</h2>
+
+      <ul>
+        <% regla.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :nombre, style: "display: block" %>
+    <%= form.text_field :nombre %>
+  </div>
+
+  <div>
+    <%= form.label :monto_minimo, style: "display: block" %>
+    <%= form.text_field :monto_minimo %>
+  </div>
+
+  <div>
+    <%= form.label :monto_maximo, style: "display: block" %>
+    <%= form.text_field :monto_maximo %>
+  </div>
+
+  <div>
+    <%= form.label :porcentaje, style: "display: block" %>
+    <%= form.text_field :porcentaje %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
